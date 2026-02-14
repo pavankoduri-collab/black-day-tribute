@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Day of India - Tribute</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(to right, #000000, #1a1a1a);
+        color: white;
+        text-align: center;
+    }
+
+    .login-container {
+        margin-top: 120px;
+    }
+
+    input {
+        padding: 10px;
+        margin: 8px;
+        width: 250px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #c62828;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #b71c1c;
+    }
+
+    .content {
+        display: none;
+        padding: 40px;
+    }
+
+    .hero-images img {
+        width: 250px;
+        height: 180px;
+        object-fit: cover;
+        margin: 15px;
+        border-radius: 10px;
+        border: 3px solid white;
+    }
+
+    .message-box {
+        background-color: rgba(255,255,255,0.1);
+        padding: 25px;
+        border-radius: 10px;
+        margin-top: 30px;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .footer {
+        margin-top: 40px;
+        font-size: 14px;
+        opacity: 0.7;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="login-container" id="loginBox">
+    <h1>🇮🇳 Black Day of India 🇮🇳</h1>
+    <p>Please Login to View the Tribute</p>
+
+    <input type="email" id="email" placeholder="Enter Mail ID" required><br>
+    <input type="password" id="password" placeholder="Enter Password"><br>
+    <button onclick="login()">Enter</button>
+</div>
+
+<div class="content" id="mainContent">
+    <h1 id="welcomeText"></h1>
+
+    <div class="message-box" id="tributeMessage"></div>
+
+    <div class="hero-images">
+        <img src="https://images.unsplash.com/photo-1584395630827-860eee694d7b" alt="Indian Soldier">
+        <img src="https://images.unsplash.com/photo-1541417904950-b855846fe074" alt="Army Tribute">
+        <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e" alt="Indian Flag Soldier">
+    </div>
+
+    <div class="footer">
+        Saluting the Brave Hearts of India 🇮🇳 <br>
+        Their Sacrifice Defines True Love and Courage.
+    </div>
+</div>
+
+<script>
+function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if(password === "Welcome123") {
+
+        let namePart = email.split("@")[0];
+        let formattedName = namePart.replace(/[0-9]/g, '');
+        formattedName = formattedName.charAt(0).toUpperCase() + formattedName.slice(1);
+
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+
+        document.getElementById("welcomeText").innerHTML = "Dear " + formattedName + ",";
+
+        document.getElementById("tributeMessage").innerHTML =
+        "On this Black Day of India, we bow our heads in deep respect and gratitude to the brave soldiers of the Indian Army who sacrificed their lives to protect our nation.<br><br>" +
+        "Valentine’s Day is a symbol of love. But true love is not just about celebration — it is about sacrifice. Our soldiers showed the purest form of love by giving their lives so that we can live safely with our families.<br><br>" +
+        "They stood in freezing borders, in extreme heat, in unimaginable danger — so that we could stand free. Their courage is our strength. Their sacrifice is our responsibility.<br><br>" +
+        "Let us honor them not just today, but every day — by living responsibly, loving our nation, and respecting the freedom we have.<br><br>" +
+        "🇮🇳 Jai Hind 🇮🇳";
+    } else {
+        alert("Invalid Password. Please use correct credentials.");
+    }
+}
+</script>
+
+</body>
+</html>
