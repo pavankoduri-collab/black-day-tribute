@@ -9,10 +9,11 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #000000, #1a1a1a);
+    background: #000;
     color: white;
     text-align: center;
     overflow-x: hidden;
+    position: relative;
 }
 
 .login-box {
@@ -45,10 +46,12 @@ button:hover {
 .content {
     display: none;
     padding: 30px;
+    position: relative;
+    z-index: 2;
 }
 
 .message {
-    background: rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.5);
     padding: 25px;
     border-radius: 10px;
     margin-top: 25px;
@@ -82,6 +85,35 @@ button:hover {
     margin-top: 30px;
     opacity: 0.7;
     font-size: 14px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Flag animation */
+.flag-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.flag {
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(to right, #ff9933 33%, #ffffff 33%, #ffffff 66%, #138808 66%);
+    background-size: 50% 100%;
+    animation: wave 10s linear infinite;
+    opacity: 0.15;
+}
+
+@keyframes wave {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    50% { transform: translateX(0%) rotate(1deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
 }
 
 </style>
@@ -104,14 +136,21 @@ button:hover {
     <div class="message" id="tributeMessage"></div>
 
     <div class="images">
-        <img src="https://images.unsplash.com/photo-1584395630827-860eee694d7b">
-        <img src="https://images.unsplash.com/photo-1541417904950-b855846fe074">
-        <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e">
+        <img src="https://images.pexels.com/photos/6287762/pexels-photo-6287762.jpeg" alt="Indian Army in Action">
+        <img src="https://images.unsplash.com/photo-1550439062-609e1531270e" alt="Pulwama Remembrance Tribute">
+        <img src="https://images.pexels.com/photos/5558593/pexels-photo-5558593.jpeg" alt="Salute to Soldiers">
+        <img src="https://images.pexels.com/photos/5946123/pexels-photo-5946123.jpeg" alt="Army Celebration">
+        <img src="https://images.pexels.com/photos/1812647/pexels-photo-1812647.jpeg" alt="Troops Marching">
     </div>
 
     <div class="footer">
         Jai Hind 🇮🇳 | Salute to the Brave Hearts
     </div>
+</div>
+
+<!-- Waving Flag -->
+<div class="flag-container">
+    <div class="flag"></div>
 </div>
 
 <!-- Background Music -->
@@ -141,7 +180,7 @@ const approvedUsers = {
 // 🔑 Password
 const correctPassword = "Welcome123";
 
-// Tribute messages (all vibes)
+// Tribute messages (all four vibes)
 const tributeVibes = [
 `🎬 Today, as the world celebrates love, we pause to honor the ultimate heroes — our soldiers. On this Black Day of India, we witness courage, sacrifice, and duty in its purest form. They stood fearless at borders, in harsh climates, against all odds — so we could live free and safe. Their sacrifice is the true definition of love and devotion. 🇮🇳 Jai Hind 🇮🇳`,
 
