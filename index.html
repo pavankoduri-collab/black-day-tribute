@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Black Day Tribute - Indian Army</title>
+<title>Black Day of India - Tribute</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #000000, #1c1c1c);
+    background: linear-gradient(to right, #000000, #1a1a1a);
     color: white;
     text-align: center;
+    overflow-x: hidden;
 }
 
 .login-box {
@@ -34,6 +35,7 @@ button {
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
+    margin: 5px;
 }
 
 button:hover {
@@ -42,7 +44,7 @@ button:hover {
 
 .content {
     display: none;
-    padding: 40px;
+    padding: 30px;
 }
 
 .message {
@@ -52,6 +54,14 @@ button:hover {
     margin-top: 25px;
     font-size: 18px;
     line-height: 1.6;
+    text-align: justify;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.images {
+    position: relative;
+    margin-top: 25px;
 }
 
 .images img {
@@ -61,12 +71,19 @@ button:hover {
     margin: 15px;
     border-radius: 10px;
     border: 3px solid white;
+    transition: transform 20s ease;
+}
+
+.images img:hover {
+    transform: scale(1.05);
 }
 
 .footer {
-    margin-top: 40px;
+    margin-top: 30px;
     opacity: 0.7;
+    font-size: 14px;
 }
+
 </style>
 </head>
 
@@ -74,12 +91,10 @@ button:hover {
 
 <div class="login-box" id="loginSection">
     <h1>🇮🇳 Black Day of India 🇮🇳</h1>
-    <p>Marquis Technologies Pvt Ltd</p>
-
+    <p>Authorized Access Only</p>
     <input type="email" id="email" placeholder="Enter Mail ID"><br>
     <input type="password" id="password" placeholder="Enter Password"><br>
     <button onclick="validateLogin()">Enter Tribute</button>
-
     <p id="errorMsg" style="color:red;"></p>
 </div>
 
@@ -99,8 +114,13 @@ button:hover {
     </div>
 </div>
 
-<script>
+<!-- Background Music -->
+<audio id="bgMusic" loop autoplay>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2d5c2f1ccf.mp3?filename=epic-patriotic-anthem-11212.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
 
+<script>
 // 🔐 Approved Email List
 const approvedUsers = {
     "pkoduri@marquistech.com": "Pavankumar Koduri",
@@ -118,11 +138,26 @@ const approvedUsers = {
     "ndeshpande@marquistech.com": "Nisha Deshpande"
 };
 
-// 🔑 Fixed Password
+// 🔑 Password
 const correctPassword = "Welcome123";
 
-function validateLogin() {
+// Tribute messages (all vibes)
+const tributeVibes = [
+`🎬 Today, as the world celebrates love, we pause to honor the ultimate heroes — our soldiers. On this Black Day of India, we witness courage, sacrifice, and duty in its purest form. They stood fearless at borders, in harsh climates, against all odds — so we could live free and safe. Their sacrifice is the true definition of love and devotion. 🇮🇳 Jai Hind 🇮🇳`,
 
+`🏢 Leadership, courage, and responsibility are exemplified by those who serve our nation. On this Black Day, we honor the soldiers who gave everything for the safety of our families and country. Their unwavering commitment teaches us that true leadership is about service and selflessness. 🇮🇳 Jai Hind 🇮🇳`,
+
+`📜 In silence they stand, in storms they fight,<br>
+Through darkest nights, they guard the light.<br>
+Their love for country, their duty untold,<br>
+Brave hearts of India, fearless and bold.<br>
+Let us honor their spirit every day. 🇮🇳 Jai Hind 🇮🇳`,
+
+`🎖 Today we remember the heroes of Pulwama and every brave soul who laid down their life for our nation. Their courage, sacrifice, and unbroken spirit remind us of the true meaning of service and patriotism. Let us salute their bravery and keep their legacy alive. 🇮🇳 Jai Hind 🇮🇳`
+];
+
+// Login function
+function validateLogin() {
     const emailInput = document.getElementById("email").value.trim().toLowerCase();
     const passwordInput = document.getElementById("password").value;
     const errorMsg = document.getElementById("errorMsg");
@@ -131,35 +166,37 @@ function validateLogin() {
         errorMsg.innerText = "Access Denied. Email not authorized.";
         return;
     }
-
     if (passwordInput !== correctPassword) {
         errorMsg.innerText = "Incorrect Password.";
         return;
     }
 
     const name = approvedUsers[emailInput];
-
     document.getElementById("loginSection").style.display = "none";
     document.getElementById("tributeSection").style.display = "block";
 
-    document.getElementById("welcomeText").innerText = "Dear " + name + ;
+    document.getElementById("welcomeText").innerText = "Dear " + name + ",";
 
-    document.getElementById("tributeMessage").innerHTML =
-"Today, as the world speaks of love, we pause to remember the highest form of love — sacrifice.<br><br>" +
+    // Start Tribute Cycle
+    cycleTributes();
+}
 
-"On this Black Day of India, we bow our heads in solemn respect to the brave soldiers of the Indian Army who laid down their lives for our nation. They did not celebrate comfort. They did not choose safety. They chose duty. They chose honor. They chose India.<br><br>" +
-
-"While we express love with words, they expressed love through courage. While we celebrate with flowers, they stood with weapons at the borders — guarding our dreams, protecting our families, and preserving our freedom.<br><br>" +
-
-"Their sacrifice was not for recognition. It was not for applause. It was for every citizen who sleeps peacefully at night without fear.<br><br>" +
-
-"True love is not just about celebration — it is about commitment, responsibility, and standing firm even when the cost is everything. Our soldiers showed us what that love truly means.<br><br>" +
-
-"Let us honor them not just with remembrance, but with gratitude, integrity, and unity in our daily lives.<br><br>" +
-
-"🇮🇳 We salute the martyrs. We remember their courage. We remain forever indebted. Jai Hind. 🇮🇳";
-
-
+// Function to cycle through all tribute vibes
+function cycleTributes() {
+    const messageBox = document.getElementById("tributeMessage");
+    let index = 0;
+    messageBox.style.opacity = 0;
+    function showNext() {
+        messageBox.innerHTML = tributeVibes[index];
+        messageBox.style.opacity = 1;
+        setTimeout(() => {
+            messageBox.style.opacity = 0;
+            index = (index + 1) % tributeVibes.length;
+            setTimeout(showNext, 1500);
+        }, 8000); // Show each tribute for 8 seconds
+    }
+    showNext();
+}
 </script>
 
 </body>
