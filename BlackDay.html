@@ -3,128 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Black Day of India - Tribute</title>
+<title>Black Day Tribute - Indian Army</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: linear-gradient(to right, #000000, #1a1a1a);
-        color: white;
-        text-align: center;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #000000, #1c1c1c);
+    color: white;
+    text-align: center;
+}
 
-    .login-container {
-        margin-top: 120px;
-    }
+.login-box {
+    margin-top: 120px;
+}
 
-    input {
-        padding: 10px;
-        margin: 8px;
-        width: 250px;
-        border-radius: 5px;
-        border: none;
-    }
+input {
+    padding: 10px;
+    margin: 8px;
+    width: 260px;
+    border-radius: 6px;
+    border: none;
+}
 
-    button {
-        padding: 10px 20px;
-        background-color: #c62828;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-    }
+button {
+    padding: 10px 20px;
+    background-color: #b71c1c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-    button:hover {
-        background-color: #b71c1c;
-    }
+button:hover {
+    background-color: #880e4f;
+}
 
-    .content {
-        display: none;
-        padding: 40px;
-    }
+.content {
+    display: none;
+    padding: 40px;
+}
 
-    .hero-images img {
-        width: 250px;
-        height: 180px;
-        object-fit: cover;
-        margin: 15px;
-        border-radius: 10px;
-        border: 3px solid white;
-    }
+.message {
+    background: rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 25px;
+    font-size: 18px;
+    line-height: 1.6;
+}
 
-    .message-box {
-        background-color: rgba(255,255,255,0.1);
-        padding: 25px;
-        border-radius: 10px;
-        margin-top: 30px;
-        font-size: 18px;
-        line-height: 1.6;
-    }
+.images img {
+    width: 260px;
+    height: 180px;
+    object-fit: cover;
+    margin: 15px;
+    border-radius: 10px;
+    border: 3px solid white;
+}
 
-    .footer {
-        margin-top: 40px;
-        font-size: 14px;
-        opacity: 0.7;
-    }
+.footer {
+    margin-top: 40px;
+    opacity: 0.7;
+}
 </style>
 </head>
 
 <body>
 
-<div class="login-container" id="loginBox">
+<div class="login-box" id="loginSection">
     <h1>🇮🇳 Black Day of India 🇮🇳</h1>
-    <p>Please Login to View the Tribute</p>
+    <p>Authorized Access Only</p>
 
-    <input type="email" id="email" placeholder="Enter Mail ID" required><br>
+    <input type="email" id="email" placeholder="Enter Mail ID"><br>
     <input type="password" id="password" placeholder="Enter Password"><br>
-    <button onclick="login()">Enter</button>
+    <button onclick="validateLogin()">Enter Tribute</button>
+
+    <p id="errorMsg" style="color:red;"></p>
 </div>
 
-<div class="content" id="mainContent">
-    <h1 id="welcomeText"></h1>
+<div class="content" id="tributeSection">
+    <h2 id="welcomeText"></h2>
 
-    <div class="message-box" id="tributeMessage"></div>
+    <div class="message" id="tributeMessage"></div>
 
-    <div class="hero-images">
-        <img src="https://images.unsplash.com/photo-1584395630827-860eee694d7b" alt="Indian Soldier">
-        <img src="https://images.unsplash.com/photo-1541417904950-b855846fe074" alt="Army Tribute">
-        <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e" alt="Indian Flag Soldier">
+    <div class="images">
+        <img src="https://images.unsplash.com/photo-1584395630827-860eee694d7b">
+        <img src="https://images.unsplash.com/photo-1541417904950-b855846fe074">
+        <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e">
     </div>
 
     <div class="footer">
-        Saluting the Brave Hearts of India 🇮🇳 <br>
-        Their Sacrifice Defines True Love and Courage.
+        Jai Hind 🇮🇳 | Salute to the Brave Hearts
     </div>
 </div>
 
 <script>
-function login() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
 
-    if(password === "Welcome123") {
+// 🔐 Approved Email List
+const approvedUsers = {
+    "pkoduri@marquistech.com": "Pavankumar Koduri",
+    "jkunbi@marquistech.com": "Jayesh Kunbi",
+    "spawar@marquistech.com": "Sanket Pawar",
+    "aghodake@marquistech.com": "Arpit Ghodake"
+    "cpanda@marquistech.com": "Chinmay Panda"
+    "vraval@marquistech.com": "Vivek Raval"
+    "asaxena@marquistech.com": "Amol Saxena"
+    "lpereira@marquistech.com": "Leroy Pereira"
+    "cpotli@marquistech.com": "Charan Potli"
+    "rsawant@marquistech.com": "Rohit Sawant"
+    "oabhyankar@marquistech.com": "Omkar Abhyankar"
+    "ryadav@marquistech.com": "Rajesh Yadav"
+    "ndeshpande@marquistech.com": "Nisha Deshpande"
+};
 
-        let namePart = email.split("@")[0];
-        let formattedName = namePart.replace(/[0-9]/g, '');
-        formattedName = formattedName.charAt(0).toUpperCase() + formattedName.slice(1);
+// 🔑 Fixed Password
+const correctPassword = "Welcome123";
 
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
+function validateLogin() {
 
-        document.getElementById("welcomeText").innerHTML = "Dear " + formattedName + ",";
+    const emailInput = document.getElementById("email").value.toLowerCase();
+    const passwordInput = document.getElementById("password").value;
+    const errorMsg = document.getElementById("errorMsg");
 
-        document.getElementById("tributeMessage").innerHTML =
-        "On this Black Day of India, we bow our heads in deep respect and gratitude to the brave soldiers of the Indian Army who sacrificed their lives to protect our nation.<br><br>" +
-        "Valentine’s Day is a symbol of love. But true love is not just about celebration — it is about sacrifice. Our soldiers showed the purest form of love by giving their lives so that we can live safely with our families.<br><br>" +
-        "They stood in freezing borders, in extreme heat, in unimaginable danger — so that we could stand free. Their courage is our strength. Their sacrifice is our responsibility.<br><br>" +
-        "Let us honor them not just today, but every day — by living responsibly, loving our nation, and respecting the freedom we have.<br><br>" +
-        "🇮🇳 Jai Hind 🇮🇳";
-    } else {
-        alert("Invalid Password. Please use correct credentials.");
+    if (!approvedUsers[emailInput]) {
+        errorMsg.innerText = "Access Denied. Email not authorized.";
+        return;
     }
+
+    if (passwordInput !== correctPassword) {
+        errorMsg.innerText = "Incorrect Password.";
+        return;
+    }
+
+    const name = approvedUsers[emailInput];
+
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("tributeSection").style.display = "block";
+
+    document.getElementById("welcomeText").innerText = "Dear " + name + ",";
+
+    document.getElementById("tributeMessage").innerHTML =
+    "On this Black Day of India, we remember the brave soldiers of the Indian Army who sacrificed their lives protecting our nation.<br><br>" +
+    "Valentine’s Day represents love. But the purest form of love is sacrifice. Our soldiers gave their lives so that we can live safely with our families.<br><br>" +
+    "They stood fearless at the borders, in extreme weather and danger, so that we could stand in freedom.<br><br>" +
+    "Let us honor them not only today, but every day — by respecting our nation and valuing the peace they secured for us.<br><br>" +
+    "🇮🇳 Jai Hind 🇮🇳";
 }
+
 </script>
 
 </body>
